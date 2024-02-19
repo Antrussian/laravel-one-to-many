@@ -10,7 +10,8 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::all();
+        // Precarica la relazione 'type' con ogni 'project'
+        $projects = Project::with('type')->get();
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -27,6 +28,7 @@ class ProjectController extends Controller
             'author' => 'required|max:255',
             'date' => 'required|date',
             'project_image' => 'required|url',
+            'type_id' => 'required|exists:types,id', // Assicura che type_id esista nella tabella 'types'
         ]);
 
         Project::create($validatedData);
@@ -35,6 +37,8 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
+        // Precarica la relazione 'type' quando visualizzi un singolo 'project'
+        $project->load('type');
         return view('admin.projects.show', compact('project'));
     }
 
@@ -51,6 +55,7 @@ class ProjectController extends Controller
             'author' => 'required|max:255',
             'date' => 'required|date',
             'project_image' => 'required|url',
+            'type_id' => 'required|exists:types,id', // Aggiungi la validazione per 'type_id'
         ]);
 
         $project->update($validatedData);

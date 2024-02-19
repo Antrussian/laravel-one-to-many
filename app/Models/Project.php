@@ -15,9 +15,10 @@ class Project extends Model
         'project_image',
         'description',
         'date',
+        'type_id',
     ];
 
-    
+
     public function type()
 {
     return $this->belongsTo(Type::class);

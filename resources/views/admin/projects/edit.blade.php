@@ -32,6 +32,16 @@
             <label for="project_image" class="form-label">URL Immagine del Progetto</label>
             <input type="url" class="form-control" id="project_image" name="project_image" value="{{ old('project_image', $project->project_image) }}" required>
         </div>
+        <div class="mb-3">
+            <label for="type_id" class="form-label">Tipologia</label>
+            <select class="form-control" id="type_id" name="type_id" required>
+                <option value="">Seleziona una Tipologia</option>
+                @foreach(\App\Models\Type::all() as $type)
+                    <option value="{{ $type->id }}" {{ $project->type_id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        
 
         <button type="submit" class="btn btn-primary">Aggiorna Progetto</button>
     </form>
