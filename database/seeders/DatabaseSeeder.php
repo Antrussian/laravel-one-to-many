@@ -12,6 +12,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+
+
+    $this->call(TypesTableSeeder::class);
+
         $this->call([
             FumettiSeeder::class,
             // PostSeeder::class,
