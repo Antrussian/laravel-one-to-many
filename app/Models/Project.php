@@ -17,9 +17,11 @@ class Project extends Model
         'date',
     ];
 
+    
     public function type()
 {
     return $this->belongsTo(Type::class);
 }
+
 
 }
